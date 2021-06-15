@@ -1,22 +1,27 @@
 class BooksController < ApplicationController
+protect_from_forgery
   def index
+   @books = Book.all
   end
 
   def show
-   @list = List.find(params[:books])
-  end
-
-  def new
-   @blog = Book.new
+   @book = Book.find(params[:id])
   end
 
   def create
-    blog = Book.new(book_params)
-    blog.save
-    redirect_to boos_path
+    book = Book.new(book_params)
+    book.save
+    redirect_to '/books'
   end
 
   def edit
+   @book = Book.find(params[:id])
+  end
+
+  def destroy
+    book = Book.find(params[:id])
+    book.destroy
+    redirect_to '/books'
   end
 
   private
