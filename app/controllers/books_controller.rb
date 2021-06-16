@@ -10,11 +10,12 @@ protect_from_forgery
   end
 
   def create
+    @books = Book.all
     @book = Book.new(book_params)
    if @book.save
       redirect_to book_path(@book.id) , notice: 'Book was successfully created.'
    else
-    flash.now[:alert] = '2 errors prohibited this book from being saved:'
+     render :index
    end
   end
 
@@ -24,8 +25,11 @@ protect_from_forgery
 
   def update
     @book = Book.find(params[:id])
-    @book.update(book_params)
-    redirect_to book_path(@book)
+   if @book.update(book_params)
+    redirect_to book_path(@book) , notice: 'Book was successfully updated.'
+   else
+     render :edit
+   end
   end
 
   def destroy
