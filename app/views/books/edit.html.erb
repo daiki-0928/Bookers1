@@ -12,7 +12,13 @@
   </div>
 
   <div>
-   <%= f.submit 'Create Book' %>
+   <%= f.submit 'Update Book' %>
   </div>
 
-  <% end %>
+<% end %>
+
+<%= link_to "show", book_path(@book.id)%>
+  |
+<%= link_to "back", books_path %>
+
+
